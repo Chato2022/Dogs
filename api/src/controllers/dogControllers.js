@@ -1,12 +1,12 @@
 const { Dog, Temperament } = require("../db");
 const axios = require("axios");
-const { cleanDogArray, cleanDog } = require("../utils/utils");
+const { cleanDogArray, cleanDog, cleanDogArrayBDD } = require("../utils/utils");
 const {API_KEY} = process.env;
 
 const myLink = `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`
 
-const createDog = async (name, image, height, weight, life_span, temperaments) => {
-    const newDog = await Dog.create({name,image,height,weight,life_span});
+const createDog = async (name, image, minHeight, maxHeight, minWeight, maxWeight, life_span, temperaments) => {
+    const newDog = await Dog.create({name,image,minHeight, maxHeight, minWeight, maxWeight,life_span});
     //Buscar por id de los temperamentos que ingresa el usuario
     temperaments.forEach(async (temperament) => {
         let temperaments = await Temperament.findOne({where:{name:temperament}});
@@ -39,7 +39,15 @@ const getDogById = async (id,source) => {
 
 const getAllDogs = async () => {
     //Buscar en la BDD
-    const databaseDogs = await Dog.findAll();
+    const databaseDogsRaw = await Dog.findAll({
+        include:{
+            model: Temperament,
+            through:{
+                attributes:[]
+            }
+        }
+    });
+    const databaseDogs = databaseDogsRaw.length>0?cleanDogArrayBDD(databaseDogsRaw):[]
     //Buscar en la API
     const apiDogsRaw = (await axios.get(myLink)).data;
     //Limpiar toda la data de la api para que sea similar a la BDD
@@ -49,8 +57,8 @@ const getAllDogs = async () => {
 }
 
 const getDogByName = async (name) => {
-
-    const databaseDogs = await Dog.findAll({where: {name}});
+    const dogNameBdd = name[0].toUpperCase() + name.substring(1);
+    const databaseDogs = await Dog.findAll({where: {name:dogNameBdd}});
 
     const apiDogsRaw = (await axios.get(myLink)).data;
 

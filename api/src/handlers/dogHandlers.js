@@ -42,13 +42,13 @@ const getDogByIdHandler = async (req,res) => {
 //RUTA: Crear un perro
 const createDogHandler = async (req,res) => {
     try {
-        const {name, image, height, weight, life_span, temperaments} = req.body;
+        const {name, image, minHeight, maxHeight, minWeight, maxWeight, life_span, temperaments} = req.body;
 
-        if (!name || !image || !height || !weight || !life_span || !temperaments) {
+        if (!name || !image || !minHeight || !maxHeight || !minWeight || !maxWeight || !life_span || !temperaments) {
             throw Error("No se pasaron los valores necesarios");
         }
         else{
-            const newDog = await createDog(name, image, height, weight, life_span, temperaments);
+            const newDog = await createDog(name, image, minHeight, maxHeight, minWeight, maxWeight, life_span, temperaments);
 
             if (!newDog) {
                 throw Error("No se pudo crear la raza de perro");

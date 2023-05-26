@@ -1,0 +1,99 @@
+.box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("../../images/backgroundAbout6.png") center center no-repeat fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1250px;
+    background-color: rgba(55, 67, 70, 0.8);
+    border: none;
+    border-radius: 3em;
+    box-shadow: 20px 20px 30px rgb(110, 108, 108);
+    margin: 3em;
+}
+.tittle{
+    color: whitesmoke;
+    font-size: 3.5em;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.content{
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 2em 0;
+    justify-content: space-around;
+}
+.containerImage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.img{
+    width: 350px;
+    height: 350px;
+    border-radius: 175px;
+    box-shadow: 15px 15px 10px black;
+}
+.containerText{
+    margin-right: 3em;
+    width: 350px;
+    height: fit-content;
+    color: whitesmoke;
+    font-size: 1.15em;
+}
+.github{
+    width: 80px;
+    height: 80px;
+    border-radius: 40px 5px 5px 40px;
+    border: none;
+    margin: 5px;
+    background-color: white;
+    transition: .3s;
+}
+.linkedin{
+    width: 80px;
+    height: 80px;
+    border-radius: 5px 40px 40px 5px;
+    border: none;
+    margin: 5px;
+    background-color: white;
+    transition: .3s;
+}
+.logoGithub{
+    fill: black;
+}
+.logoLinkedin{
+    fill: #0078D4;
+}
+
+.github:hover{
+    background-color: black;
+}
+.github:hover .logoGithub{
+    fill: white;
+}
+
+.linkedin:hover{
+    background-color: #0078D4;
+}
+.linkedin:hover .logoLinkedin{
+    fill: white;
+}
+
+.github:active{
+    transform: scale(0.8);
+}
+.linkedin:active{
+    transform: scale(0.8);
+}
+
+
+
+
